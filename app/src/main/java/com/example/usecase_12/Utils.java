@@ -11,6 +11,17 @@ public class Utils {
     private static final int INDEX_NOT_FOUND = -1;
     private static final String EMPTY = "";
 
+    /**
+     * For a string takes its substring and appends string appendToEnd to it.
+     * Substring's end is either whitespace character ' ', or character with index equal to upper
+     * parameter (whatever happens first).
+     *
+     * @param  str  a string
+     * @param  lower index starting from which whitespace should be looked for
+     * @param  upper end index of substring, if whitespace wasn't found before it
+     * @param  appendToEnd a string appended to the end of the result
+     * @return the string obtained from str by taking its substring and appending string appendToEnd
+     */
     public static String abbreviate(final String str, int lower, int upper, final String appendToEnd) {
         isTrue(upper >= -1, "upper value cannot be less than -1");
         isTrue(upper >= lower || upper == -1, "upper value is less than lower value");
@@ -41,6 +52,15 @@ public class Utils {
         return result.toString();
     }
 
+    /**
+     * Divides a string into words by given delimiters.
+     * Then for each word its first character is added to the result.
+     * For example, for input "Banana cat window" and delimeter ' ' the result is "Bcw".
+     *
+     * @param  str  a string
+     * @param  delimiters  characters that indicate word end
+     * @return the string that contains the first characters of the words in the input str
+     */
     public static String initials(final String str, final char... delimiters) {
         if (isEmpty(str)) {
             return str;
@@ -68,6 +88,13 @@ public class Utils {
         return new String(newCodePoints, 0, count);
     }
 
+    /**
+     * For each character of the given string adds this character in other case to the result.
+     * For example, for input "BaNaNa" the result is "bAnAnA"/
+     *
+     * @param  str  a string
+     * @return the string with same characters as the input str, but each in opposite case
+     */
     public static String swapCase(final String str) {
         if (isEmpty(str)) {
             return str;
@@ -99,6 +126,18 @@ public class Utils {
         return new String(newCodePoints, 0, outOffset);
     }
 
+
+    /**
+     * Breaks a string into lines, inserting new line string delimeter each time given substring
+     * found or current substring has certain length
+     *
+     * @param  str  a string
+     * @param  wrapLength  substring length, after which new line delimeter should be added
+     * @param  newLineStr  new line delimeter, a string
+     * @param  wrapLongWords  flag indicating if break words longer wrapLength
+     * @param  wrapOn  a substring instead of which newLineStr should be inserted
+     * @return string obtained from the original string with inserted new-line substrings
+     */
     public static String wrap(final String str,
                               int wrapLength,
                               String newLineStr,
